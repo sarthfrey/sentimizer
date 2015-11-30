@@ -6,15 +6,15 @@
 	</head>
 	<body>
 		<div class="container">
-		<h1 class="text-center">Submit</h1>
+		<h1 class="text-center">Sentimizer</h1>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="row">
-						<form class="form-inline text-center" role="form" method="post">
+						<form class="form-inline text-center" role="form" action="/sentiment/" method="post">
 							<div class="input-group col-sm-8">
 								<input name="sentiment" type="text" class="form-control" placeholder="Analyze...">
 								<span class="input-group-btn">
-						        	<button id="submit-button" class="btn btn-primary" action="sentiment" type="submit">sentimize</button>
+									<input type="submit" id="submit-button" class="btn btn-primary"/>
 						        </span>
 							</div>
 						</form>
@@ -22,7 +22,8 @@
 					
 				</div>
 				<div class="panel-body">
-					<p>{{sentiment}}</p>
+					<p class="text-center">{{sentiment}}</p>
+					<p class="text-center">{{score}}</p>
 				</div>
 			</div>
 		</div>

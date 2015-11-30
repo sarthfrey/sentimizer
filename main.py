@@ -1,7 +1,7 @@
 """`main` is the top level module for your Flask application."""
 
 # Import the Flask Framework
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
@@ -11,7 +11,11 @@ app = Flask(__name__)
 def hello():
     return render_template('index.html')
 
-@app.rout('sentiment')
+@app.route('/sentiment/', methods=['POST'])
+def sentiment():
+	sentiment = request.form['sentiment']
+	score = 1
+	return render_template('index.html', sentiment = "Text: " + sentiment, score = "Score: " + str(score))
 
 
 @app.errorhandler(404)
