@@ -6,6 +6,20 @@ app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
 
+#BEGIN UNMODULATED CODE
+import json
+from google.appengine.api import urlfetch
+
+def buildSentReq(text, api_key):
+    return 'https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text=' + text + '&apikey=' + api_key
+  
+def getScore(text):
+    url = buildSentReq(text, '944a963d-b63c-4d65-a562-d9507ca49571')
+    result = urlfetch.fetch(url)
+    if result.status_code == 200:
+        jsonSent = json.loads(result.content)
+        return jsonSent['aggregate']['score']
+#END UNMODULATED CODE
 
 @app.route('/')
 def hello():
@@ -13,9 +27,9 @@ def hello():
 
 @app.route('/sentiment/', methods=['POST'])
 def sentiment():
-	sentiment = request.form['sentiment']
-	score = 1
-	return render_template('index.html', sentiment = "Text: " + sentiment, score = "Score: " + str(score))
+	sentiment_text = request.form['sentiment']
+	score = getScore(sentiment_text)	#NEEDS TO BE MODULATED
+	return render_template('index.html', sentiment = "Text: " + sentiment_text, score = "Score: " + str(score))
 
 
 @app.errorhandler(404)
