@@ -1,6 +1,6 @@
 ## Sentimizer - Python Flask Project
 
-A a micro web app that does sentiment analysis on text to figure out if it's positive, negative, or neutral.
+A micro web app that does sentiment analysis on text to figure out if it's positive, negative, or neutral.
 
 Used Google App Engine with the 
 [Flask micro framework](http://flask.pocoo.org).
